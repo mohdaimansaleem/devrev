@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DevTravels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <!--Navbar starts-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="admin.html">DevTravels-Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            </button>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                   <button id="logoutBtn">Log out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--navbar ends-->
+
+
+    <div class="container" style="display: flex; flex-direction: row;">
+        <!--Additional Box Starts-->
+        <div class="left">
+            <div class="container-fluid mt-4 text-center">
+                <div class="card text-bg-light mb-3 shadow-lg">
+                    <!-- <div class="card-header bg-white">Upload Invoice</div> -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="p-3 bg-primary border border-0 rounded-2 bg-gradient text-white" id="flights">
+                                    Total Flights : 0</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="p-3 bg-danger border border-0 rounded-2 bg-gradient text-white" id="seats" >
+                                    Available Seats : 0</div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+
+        </div>
+        <!--Additional Box Ends-->
+
+        <!--Adding New Flights Starts-->
+        <div class="right">
+            <div class="addFlights">
+                <form id="myForm">
+                    <input type="text" id="flightId" placeholder="Enter Flight id" required/>
+                    <input type="number" id="fare" placeholder="Enter fare" required/>
+                    <input type="text" id="source" placeholder="Enter source" required/>
+                    <input type="text" id="destination" placeholder="Enter destination" required/>
+                    <input type="date" id="date" placeholder="Enter date" required/>
+                    <input type="time" id="time" placeholder="Enter time" required/>
+                    <p class="text-center text-success" id="warning"></p>
+
+                    <input type="submit" class="button" id="addFlight" value="Add Flight" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Adding New Flights Ends-->
+
+    <!--Flights Details Start-->
+    <div class="datatables">
+        <div class="box">
+            <!-- DataTales Example -->
+            <div class="card shadow-lg mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">List of Flights:</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Flight Id</th>
+                                    <th>Source</th>
+                                    <th>Destination</th>
+                                    <th>Seats Availabe</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Flight Id</th>
+                                    <th>Source</th>
+                                    <th>Destination</th>
+                                    <th>Seats Availabe</th>
+                                    <th>View</th>
+                                </tr>
+                            </tfoot>
+                            <tbody id="flights">
+                                <!-- <tr>
+                                 <td>Date</td>
+                                 <td>Status</td>
+                                 <td>Location</td>
+                                 <td>Action</td>
+                             </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!--Flights Details Ends-->
+
+    <!--footer starts-->
+    <footer>
+        <center>
+            <p>
+                Mohd Aiman Saleem |
+                DevRev &copy; 2023
+            </p>
+
+        </center>
+    </footer>
+    <!--footer ends-->
+
+    <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+        import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updatePassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getDatabase, ref as dRef, set, get, child, update, push, remove } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyC0aq5bOk4XaSt88ZZ07PSAoslmUSkkQvA",
+            authDomain: "devrevs.firebaseapp.com",
+            databaseURL: "https://devrevs-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "devrevs",
+            storageBucket: "devrevs.appspot.com",
+            messagingSenderId: "766013496767",
+            appId: "1:766013496767:web:908755e2328056adead50a",
+            measurementId: "G-V23KVPT9T3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+
+        const form = document.getElementById("myForm");
+        form.addEventListener("submit", addFlight);
+
+    //adding flights    
+    async function addFlight(event) {
+            event.preventDefault();
+           
+            const flightID = document.getElementById("flightId").value;
+            const source = document.getElementById("source").value;
+            const destination = document.getElementById("destination").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const fare = document.getElementById("fare").value;
+
+            const db = getDatabase();
+            const postData = {
+                source,
+                destination,
+                date,
+                time,
+                fare,
+                seatsAvail: 60
+            }
+
+            const updates = {};
+            updates[`/flights/${flightID}`] = postData;
+            update(dRef(db), updates);
+            alert("flight added successfully!");
+            form.reset();
+    }
+
+
+    //showing flights in datatable
+    function searchFlights() {
+     var flights=0;
+     let seats=0;
+    clearTable();
+
+      //populating the dataTable
+    const dbRef = dRef(getDatabase());
+      get(child(dbRef, `/flights`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          let invoiceObj = {};
+          snapshot.forEach(function (childSnapshot) {
+            invoiceObj = childSnapshot.val();
+            invoiceObj['flightID'] = childSnapshot.key;
+            flights+=1;
+
+            seats+=invoiceObj.seatsAvail;
+            document.getElementById("flights").innerHTML="<p>Total Flights : "+`${flights}`+"</p>";
+            document.getElementById("seats").innerHTML="<p>Available Seats : "+`${seats}`+"</p>";
+
+            console.log(flights)
+            addTableRow(`${invoiceObj.date}`, `${invoiceObj.flightID}`, `${invoiceObj.source}`, `${invoiceObj.destination}`,`${invoiceObj.seatsAvail}`, `<button type="button"  class="btn btn-danger btn-sm" value=flightId2234>Delete</button>`);
+          });
+        }
+      }).catch((error) => {
+        console.error(error);
+    });
+
+    async function deleteFlight() {
+            const db = getDatabase();
+            var id=document.getElementsByTagName("button").value;
+            console.log(id);
+            remove(dRef(db, 'flights/'`${id}`));
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 900);
+        }
+
+   
+console.log(flights);
+      // datatable populating end 
+    function addTableRow(a, b, c, d, e, f,g) {
+            var table = $('#dataTable').DataTable();
+            table.row.add([a, b, c, d, e, f,g]).draw();
+      }
+
+      function clearTable() {
+        var table = $('#dataTable').DataTable();
+        table.clear().draw();
+      }
+      //show not found data
+    }
+    searchFlights();  
+    
+    //logout users
+    document.getElementById('logoutBtn').addEventListener('click',()=>{
+        signOut(auth)
+            .then(() => {
+            localStorage.removeItem("DevTravels");
+            window.location = 'index.html';
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+    });
+        
+
+    </script>
+</body>
+
+</html>

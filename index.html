@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevTravels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body id="body" style="display: none;">
+
+  <div class="login">
+    <div class="loginmodal">
+      <h2>
+        Welcome to DevTravels
+      </h2>
+      <form>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <input type="password" id="password" placeholder="Enter your password" />
+        <p class="text-center text-danger" id="warning"></p>
+        <input type="button" class="button" id="loginBtn" value="Login" />
+        <a href="signup.html">New to DevTravels?</a>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyC0aq5bOk4XaSt88ZZ07PSAoslmUSkkQvA",
+  authDomain: "devrevs.firebaseapp.com",
+  databaseURL: "https://devrevs-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "devrevs",
+  storageBucket: "devrevs.appspot.com",
+  messagingSenderId: "766013496767",
+  appId: "1:766013496767:web:908755e2328056adead50a",
+  measurementId: "G-V23KVPT9T3"
+};
+
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const userObj = JSON.parse(localStorage.getItem("DevTravels"));
+    
+    if(userObj){
+      userLogin(userObj["email"],userObj["password"],false);
+    }else{
+      document.getElementById("body").style.display = "block";
+    }
+
+
+    async function userLogin(email, password, msg) {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          let userObj = {
+            user: email.split("@")[0],
+            email: email,
+            password: password
+          };
+
+          localStorage.setItem("DevTravels", JSON.stringify(userObj));
+
+          if (userObj["user"] == "admin") {
+            window.location = "admin.html";
+          } else {
+            window.location = "home.html";
+          }
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(msg==true){
+            document.getElementById("warning").style.visibility = "visible";
+            document.getElementById("warning").innerHTML ="Invalid UserName/Password :(";
+          }
+          document.getElementById("body").style.display = "block";
+        });
+    }
+    console.log(document.getElementById("email"));
+
+    document.getElementById("loginBtn").addEventListener("click", ()=> userLogin(document.getElementById("email").value,document.getElementById("password").value, true));
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
