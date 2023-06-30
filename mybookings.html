@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="css/mybookings.css">
 </head>
 <body>
-
   <!--Navbar starts-->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -76,9 +75,6 @@
                     </table>
                 </div>
             </div>
-        
-
-
     </div>
 </div>
 <!--Flights Details Ends-->
@@ -95,10 +91,6 @@
     </center>
   </footer>
   
-
-
-  
-
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -110,8 +102,6 @@
     crossorigin="anonymous"></script>
 
     <script>
-
-
     document.getElementById('logoutBtn').addEventListener('click', () => {
       signOut(auth)
         .then(() => {
@@ -171,7 +161,7 @@
             console.log(invoiceObj.date)
           
               
-            addTableRow(`${invoiceObj.date}`, `${invoiceObj.flightID}`, `${invoiceObj.source}`, `${invoiceObj.destination}`, `${invoiceObj.billAmount}`, `<button type="button" class="btn btn-primary btn-sm">Book</button>`);
+            addTableRow(`${invoiceObj.date}`, `${invoiceObj.flightID}`, `${invoiceObj.source}`, `${invoiceObj.destination}`, `${invoiceObj.fare}`, `<button type="button" class="btn btn-primary btn-sm">Book</button>`);
             
           });
         }
@@ -205,9 +195,6 @@
     });
 
     getData();
-
-   
-        
         </script>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
