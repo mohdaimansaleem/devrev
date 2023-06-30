@@ -7,7 +7,7 @@
   <title>DevTravels</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 
@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="templates/home.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="mybookings.html">My Bookings</a>
@@ -43,7 +43,7 @@
 
     <!--Gif Starts-->
     <div class="left">
-      <img src="assets/leftGif.gif" alt="Gif of aeroplane" srcset="">
+      <img src="/assets/leftGif.gif" alt="Gif of aeroplane" srcset="">
     </div>
     <!--Gif ends-->
     <!--Bookinig container Starts-->
@@ -56,17 +56,18 @@
           <p class="text-center text-success" id="warning"></p>
 
           <input type="submit" class="button" id="findFlight" value="Find Flight" />
+          <p id="notfound" style="display: none;">No flights found :(</p>
         </form>
       </div>
     </div>
-  </div>
-  <!--Booking Container Ends-->
+
+    <!--Booking Container Ends-->
   </div>
 
 
   <!--Search Result starts-->
   <!--show results when searched-->
-  <div class="searchResult">
+  <div class="searchResult" id="result" style="display: none;">
     <div class="datatables">
       <div class="box">
         <!-- DataTales Example -->
@@ -90,7 +91,6 @@
                 </thead>
                 <tfoot>
                   <tr>
-
                     <th>Flight Id</th>
                     <th>Source</th>
                     <th>Destination</th>
@@ -122,7 +122,7 @@
   <h2>Top Travels In India :</h2>
   <div class="box">
     <div class="card" style="width: 18rem;">
-      <img src="assets/delhi.jpg" class="card-img-top" alt="delhi image" style="height: 200px;">
+      <img src="/assets/delhi.jpg" class="card-img-top" alt="delhi image" style="height: 200px;">
       <div class="card-body">
         <p class="card-text">Experience the vibrant blend of history, culture, and modernity in the heart of India with
           Delhi tourism.</p>
@@ -130,7 +130,7 @@
     </div>
 
     <div class="card" style="width: 18rem;">
-      <img src="assets/hyderabad.jpg" class="card-img-top" alt="hyderabad image" style="height: 200px;">
+      <img src="/assets/hyderabad.jpg" class="card-img-top" alt="hyderabad image" style="height: 200px;">
       <div class="card-body">
         <p class="card-text">"Embark on a captivating journey to Hyderabad, where tradition meets technology. Explore
           ancient forts, taste delectable biryanis.</p>
@@ -139,7 +139,7 @@
 
 
     <div class="card" style="width: 18rem;">
-      <img src="assets/goa.webp" class="card-img-top" alt="goa image" style="height: 200px;">
+      <img src="/assets/goa.webp" class="card-img-top" alt="goa image" style="height: 200px;">
       <div class="card-body">
         <p class="card-text">Escape to paradise on the sun-kissed shores of Goa. With its pristine beaches, vibrant
           nightlife,water sports.</p>
@@ -147,7 +147,7 @@
     </div>
 
     <div class="card" style="width: 18rem;">
-      <img src="assets/agra.jpg" class="card-img-top" alt="agra image" style="height: 200px;">
+      <img src="/assets/agra.jpg" class="card-img-top" alt="agra image" style="height: 200px;">
       <div class="card-body">
         <p class="card-text">Journey to Agra and witness the eternal beauty of the Taj Mahal, a UNESCO World Heritage
           site. Explore the rich Mughal history.</p>
@@ -155,7 +155,7 @@
     </div>
 
     <div class="card" style="width: 18rem;">
-      <img src="assets/varanasi.jpg" class="card-img-top" alt="varanasi image" style="height: 200px;">
+      <img src="/assets/varanasi.jpg" class="card-img-top" alt="varanasi image" style="height: 200px;">
       <div class="card-body">
         <p class="card-text">Experience the spiritual soul of India in Varanasi, where ancient traditions and sacred
           rituals unfold along the banks of River Ganga.</p>
@@ -163,6 +163,36 @@
     </div>
   </div>
   <!--Top Travels Ends-->
+
+
+  <!-- Button trigger modal -->
+  <button type="button" style="display: none;" id="launchModal" class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop">
+  </button>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-xl-down modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Book Your Flights</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card mb-3">
+            <input type="number" placeholder="Enter Number of seats" id="seats">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" id="bookBtn">Book</button>
+          <input style="display:none" ; value="" id="modalInvoiceId"></input>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!--footer starts-->
   <footer>
@@ -175,13 +205,6 @@
     </center>
   </footer>
 
-  <script>
-
-
-
-
-
-  </script>
   <!--footer ends-->
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
@@ -221,6 +244,7 @@
 
     function searchFlights(event) {
       event.preventDefault();
+
       clearTable();
       const source = document.getElementById("source").value;
       const destination = document.getElementById("destination").value;
@@ -228,19 +252,31 @@
 
       //populating the dataTable
       const dbRef = dRef(getDatabase());
+
+
+      let foundres = false;
       get(child(dbRef, `/flights`)).then((snapshot) => {
+
         if (snapshot.exists()) {
           let invoiceObj = {};
+
           snapshot.forEach(function (childSnapshot) {
             invoiceObj = childSnapshot.val();
             invoiceObj['flightID'] = childSnapshot.key;
-            if (invoiceObj.source == source && invoiceObj.destination == destination && invoiceObj.date == date)
-              addTableRow(`${invoiceObj.flightID}`, `${invoiceObj.source}`, `${invoiceObj.destination}`, `${invoiceObj.time}`, `${invoiceObj.fare}`, `<button type="button" class="btn btn-primary btn-sm">Book</button>`);
+            if (invoiceObj.source == source && invoiceObj.destination == destination && invoiceObj.date == date) {
+              addTableRow(`${invoiceObj.flightID}`, `${invoiceObj.source}`, `${invoiceObj.destination}`, `${invoiceObj.time}`, `${invoiceObj.fare}`, `<button type="button" class="btn btn-primary btn-sm" onclick="openInvoice('${invoiceObj.flightID}')">Book</button>`);
+              document.getElementById("result").style.display = 'block';
+              document.getElementById('modalInvoiceId').value = invoiceObj.flightID;
+              foundres = true;
+            }
           });
         }
-      }).catch((error) => {
+      }
+      ).catch((error) => {
         console.error(error);
-      });
+      }
+      );
+
       // datatable populating end 
       function addTableRow(a, b, c, d, e, f) {
         var table = $('#dataTable').DataTable();
@@ -250,8 +286,6 @@
         var table = $('#dataTable').DataTable();
         table.clear().draw();
       }
-
-
     }
 
 
@@ -267,9 +301,51 @@
     });
 
 
+    document.getElementById('bookBtn').addEventListener('click', () => {
 
+      const dbRef = dRef(getDatabase());
+      const updates = {};
+      const updates2 = {};
+      var ans = 60;
+      const db = getDatabase();
+      const id = document.getElementById('modalInvoiceId').value;
+
+      var pres = document.getElementById("seats").value;
+      get(child(dbRef, '/flights/' + `${id}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          ans = snapshot.val().seatsAvail - pres;
+          if (ans < 0) {
+            alert("Can't book the tickets as we dont have enought seats :(")
+          } else {
+            updates[`/flights/` + id + '/seatsAvail'] = ans;
+            update(dRef(db), updates);
+
+
+            const userObj = JSON.parse(localStorage.getItem("DevTravels"));
+            var user = userObj['user'];
+            var flightID = document.getElementById('modalInvoiceId').value;
+
+            updates2['/user/' + `${user}` + "/" + `${flightID}`] = snapshot.val();
+            update(dRef(db), updates2);
+            alert("sucessfully booked tickets");
+          }
+
+        }
+      });
+    })
+  </script>
+
+  <script>
+    function openInvoice(id) {
+      document.getElementById('launchModal').click();
+    }
+
+    function customSearch(e) {
+      $('#dataTable').DataTable().search(e.innerHTML.split(':')[0]).draw();
+    }
 
   </script>
+
 </body>
 
 </html>
