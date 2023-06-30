@@ -67,3 +67,19 @@ a{
     color: palevioletred;
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .loginmodal {
+      width: 80vw;
+    }
+    h2{
+      display: none;
+    }
+    form {
+      width: 80vw;
+    }
+    
+    input {
+      width: 100%;
+    }
+  }
